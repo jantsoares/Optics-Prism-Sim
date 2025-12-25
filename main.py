@@ -18,14 +18,16 @@ def plot_prism_and_rays(ax, n1, n2, theta1):
     ax.clear()
 
     # Prism vertices
-    prism_x = [0, 1, 0.5, 0]
-    prism_y = [0, 0, np.sqrt(3) / 2, 0]
+    prism_x = [0, 0, np.sqrt(3) / 2, 0]
+    prism_y = [-0.5, 0.5, 0, -0.5]
 
     # Initial ray
     theta1_rad = np.radians(theta1)
     x_in = np.linspace(-0.5, 0, 100)
-    y_in = np.tan(theta1_rad) * x_in + 0.5
-
+    y_in = np.tan(theta1_rad) * x_in 
+    if y_in[0] < -0.6:
+        y_in = np.linspace(-0.6, 0, 100)
+        x_in = y_in/ np.tan(theta1_rad)
     # Calculate refraction at the first surface
     theta2 = snell_law(n1, n2, theta1)
     if theta2 is None:
@@ -74,7 +76,7 @@ ax_theta1 = plt.axes([0.1, 0.15, 0.65, 0.03])
 
 slider_n1 = Slider(ax_n1, 'n1', 1.0, 2.0, valinit=initial_n1)
 slider_n2 = Slider(ax_n2, 'n2', 1.0, 2.0, valinit=initial_n2)
-slider_theta1 = Slider(ax_theta1, '\u03b81', 0, 90, valinit=initial_theta1)
+slider_theta1 = Slider(ax_theta1, '\u03b81', 0, 89.99, valinit=initial_theta1)
 
 
 # Update function for sliders
