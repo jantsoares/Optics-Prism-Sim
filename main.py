@@ -34,7 +34,7 @@ def plot_prism_and_rays(ax, n1, n2, theta1):
         x_refract, y_refract = [], []
     else:
         theta2_rad = np.radians(theta2)
-        x_refract = np.linspace(0, 0.5, 100)
+        x_refract = np.linspace(0, np.sqrt(3) / (2*np.sqrt(3)*np.tan(theta2_rad)+2), 100)
         y_refract = np.tan(theta2_rad) * x_refract
 
     # Plot the prism
@@ -74,8 +74,8 @@ ax_n1 = plt.axes([0.1, 0.25, 0.65, 0.03])
 ax_n2 = plt.axes([0.1, 0.2, 0.65, 0.03])
 ax_theta1 = plt.axes([0.1, 0.15, 0.65, 0.03])
 
-slider_n1 = Slider(ax_n1, 'n1', 1.0, 2.0, valinit=initial_n1)
-slider_n2 = Slider(ax_n2, 'n2', 1.0, 2.0, valinit=initial_n2)
+slider_n1 = Slider(ax_n1, 'n1', 1.0, 3.0, valinit=initial_n1)
+slider_n2 = Slider(ax_n2, 'n2', 1.0, 3.0, valinit=initial_n2)
 slider_theta1 = Slider(ax_theta1, '\u03b81', 0, 89.99, valinit=initial_theta1)
 
 
