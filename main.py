@@ -36,19 +36,32 @@ def plot_prism_and_rays(ax, n1, n2, theta1):
         theta2_rad = np.radians(theta2)
         x_refract = np.linspace(0, np.sqrt(3) / (2*np.sqrt(3)*np.tan(theta2_rad)+2), 100)
         y_refract = np.tan(theta2_rad) * x_refract
+        # Calculate refraction at the second surface
+        theta3 = snell_law(n2, n1, 60-theta2)
+        if theta3 is None:
+            x_refract2, y_refract2 = [], []
+        else:
+            theta3_rad = np.radians(theta3)
+    #        x_refract2 = np.linspace(-0.5, 1, 100)
+            x_refract2 = np.linspace(np.sqrt(3) / (2*np.sqrt(3)*np.tan(theta2_rad)+2), 1, 100)
+            x2= np.sqrt(3) / (2*np.sqrt(3)*np.tan(theta2_rad)+2)
+            y2= np.tan(theta2_rad)*x2
+            y_refract2 = y2-x2*np.tan(np.pi/3-theta3_rad)+np.tan(np.pi/3-theta3_rad) * x_refract2
 
     # Plot the prism
     ax.plot(prism_x, prism_y, 'k-', linewidth=2, label='Prism')
 
     # Plot rays
-    ax.plot(x_in, y_in, 'r-', label='Incident Ray')
+    ax.plot(x_in, y_in, 'r-', label=f'Incident Ray: {theta1:.1f}°')
     if theta2 is not None:
-        ax.plot(x_refract, y_refract, 'b-', label='Refracted Ray')
+        ax.plot(x_refract, y_refract, 'b-', label=f'1st Refracted Ray: {theta2:.1f}°')
+    if theta3 is not None and theta2 is not None:
+        ax.plot(x_refract2, y_refract2, 'g-', label=f'2nd Refracted Ray: {theta3:.1f}°')
 
     # Labels and legend
-    ax.text(-0.4, 0.6, f"Incident: {theta1:.1f}°", color='red')
-    if theta2 is not None:
-        ax.text(0.2, 0.1, f"Refracted: {theta2:.1f}°", color='blue')
+#    ax.text(-0.4, 0.6, f"Incident: {theta1:.1f}°", color='red')
+#    if theta2 is not None:
+#        ax.text(0.2, 0.1, f"Refracted: {theta2:.1f}°", color='blue')
     ax.legend()
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
@@ -76,7 +89,7 @@ ax_theta1 = plt.axes([0.1, 0.15, 0.65, 0.03])
 
 slider_n1 = Slider(ax_n1, 'n1', 1.0, 3.0, valinit=initial_n1)
 slider_n2 = Slider(ax_n2, 'n2', 1.0, 3.0, valinit=initial_n2)
-slider_theta1 = Slider(ax_theta1, '\u03b81', 0, 89.99, valinit=initial_theta1)
+slider_theta1 = Slider(ax_theta1, '\u03b81', 0.01, 89.99, valinit=initial_theta1)
 
 
 # Update function for sliders
