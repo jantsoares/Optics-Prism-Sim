@@ -1,17 +1,22 @@
 
 # **Optics Prism Simulation**
-A Python-based interactive simulation demonstrating light refraction and reflection through a prism using Snell's Law. This project visually represents the behavior of light as it passes through a triangular prism, allowing users to modify key parameters and observe the results in real time.
+A Python-based interactive simulation demonstrating light refraction and reflection (not yet implemented) through a prism using Snell's Law. This project visually represents the behavior of light as it passes through a triangular prism, allowing users to modify key parameters and observe the results in real time. 
+Yet to be implemented: 
+   1- The reflected rays 
+   2- The correct behavior when the light doesn't reach the hollow interior of the hollow prism.
+   3- A button in the main program to switch between the solid and hollow cases
 
 ---
 
 ## **Features**
-- Simulate light refraction and reflection through a prism with customizable parameters.
+- Simulate light refraction and reflection (to be implemented) through a solid or hollow prism with customizable parameters.
 - Interactive sliders to adjust:
-  - Refractive indices of materials (\(n_1\) and \(n_2\)).
+  - Refractive indices of materials (\(n_1\), \(n_2\), and \(n_3\)).
+  - Prism wall thickness (\(l\)).
   - Angle of incidence (\(\\theta_1\)).
 - Real-time graphical updates showcasing:
-  - Incident, refracted, and reflected rays.
-  - Labels indicating calculated angles of refraction and reflection.
+  - Incident, refracted, and reflected (to be implemented) rays.
+  - Labels indicating calculated angles of refraction and reflection (to be implemented).
 - Clear and user-friendly visualization with a built-in reset button.
 
 ---
@@ -40,6 +45,11 @@ A Python-based interactive simulation demonstrating light refraction and reflect
    ```bash
    python main.py
    ```
+   or
+   ```bash
+   python mainhollow.py
+   ```
+   
 
 ---
 
